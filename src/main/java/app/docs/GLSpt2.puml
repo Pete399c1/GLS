@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/class-diagram
+!pragma layout smetana
+
+class Parcel{
+-int id <<PK, auto-generated>>
+-String trackingNumber
+-String senderName
+-String receiverName
+-DeliveryStatus deliveryStatus
+-LocalDateTime updated
++prePersist(): void <<@PrePersist>>
++preUpdate(): void <<@PreUpdate>>
+}
+
+class Location{
+-int id <<PK, auto-generated>>
+-double latitude
+-double longitude
+-String address
+}
+
+class Shipment{
+-int id <<PK, auto-generated>>
+-Parcel parcel <<ManyToOne>>
+-Location sourceLocation <<ManyToOne>>
+-Location destinationLocation <<ManyToOne>>
+-LocalDateTime shipmentDateAndTime
+}
+
+Shipment "0..*" --> "1" Parcel
+Shipment "0..*" --> "1" Location
+Shipment "0..*" --> "1" Location
+@enduml
