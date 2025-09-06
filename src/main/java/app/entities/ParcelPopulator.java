@@ -6,8 +6,22 @@ import java.time.LocalDateTime;
 
 public class ParcelPopulator {
     public static Parcel[] populate(ParcelDao parcelDao){
-        Parcel p1 = new Parcel(1,"h124","Peter Marcher","Ida Marcher", DeliveryStatus.PENDING, LocalDateTime.now());
-        Parcel p2 = new Parcel(2,"h125","Lucas walker","Ivy petersen ", DeliveryStatus.DELIVERED, LocalDateTime.now());
+        Parcel p1 = Parcel.builder()
+                .trackingNumber("h124")
+                .SenderName("peter marcher")
+                .receiverName("ida marcher")
+                .deliveryStatus(DeliveryStatus.PENDING)
+                .updated(LocalDateTime.now())
+                .build();
+
+        Parcel p2 = Parcel.builder()
+                .trackingNumber("h125")
+                .SenderName("lucas walker")
+                .receiverName("ivy petersen")
+                .deliveryStatus(DeliveryStatus.DELIVERED)
+                .updated(LocalDateTime.now())
+                .build();
+
 
         parcelDao.create(p1);
         parcelDao.create(p2);

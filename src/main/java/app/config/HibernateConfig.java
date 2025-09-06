@@ -1,6 +1,8 @@
 package app.config;
 
+import app.entities.Location;
 import app.entities.Parcel;
+import app.entities.Shipment;
 import app.utils.Utils;
 import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.SessionFactory;
@@ -40,6 +42,8 @@ public class HibernateConfig {
     // TODO: IMPORTANT: Add Entity classes here for them to be registered with Hibernate
     private static void getAnnotationConfiguration(Configuration configuration) {
         configuration.addAnnotatedClass(Parcel.class);
+        configuration.addAnnotatedClass(Location.class);
+        configuration.addAnnotatedClass(Shipment.class);
     }
 
     private static EntityManagerFactory createEMF(boolean forTest) {

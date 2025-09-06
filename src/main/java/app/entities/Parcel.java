@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -42,6 +44,19 @@ public class Parcel {
 
     @Column(name = "updated")
     private LocalDateTime updated;
+
+    @OneToMany(mappedBy = "parcel", cascade = CascadeType.ALL)
+    @Builder.Default
+    private Set<Shipment>  shipments = new HashSet<>();
+
+
+    public void addShipment(Shipment shipment){
+        this.shipments.add(shipment);
+        if(shipment != null){
+            shipment.setParcel(this);
+        }
+    }
+
 
     //Hibernate will be working with this on auto
     // every time I will be using update og create in my Dao class.
