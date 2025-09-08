@@ -1,6 +1,8 @@
-package app.entities;
+package app.services;
 
 import app.dao.ParcelDao;
+import app.entities.DeliveryStatus;
+import app.entities.Parcel;
 
 import java.time.LocalDateTime;
 

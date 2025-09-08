@@ -3,7 +3,7 @@ package app.dao;
 import app.config.HibernateConfig;
 import app.entities.DeliveryStatus;
 import app.entities.Parcel;
-import app.entities.ParcelPopulator;
+import app.services.ParcelPopulator;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.AfterEach;
@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Optional;
 
-import static app.config.HibernateConfig.emf;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParcelDaoTest {

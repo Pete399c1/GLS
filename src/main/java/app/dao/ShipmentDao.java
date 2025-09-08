@@ -15,6 +15,10 @@ import java.util.List;
 public class ShipmentDao {
     private EntityManagerFactory emf;
 
+    public ShipmentDao(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+
     public Shipment findById(int id){
         try(EntityManager em = emf.createEntityManager()){
             return  em.find(Shipment.class, id);
@@ -28,13 +32,42 @@ public class ShipmentDao {
         }
     }
 
-    public Shipment create(Shipment shipment){
+    public Shipment createShipment(Shipment shipment){
         try(EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.persist(shipment);
             em.getTransaction().commit();
         }
         return shipment;
+    }
+
+    public Shipment update(Shipment shipment) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            Shipment merged = em.merge(shipment);
+            em.getTransaction().commit();
+            return merged;
+        }
+    }
+
+    public boolean delete(int id) {
+        try (EntityManager em = emf.createEntityManager()) {
+            Shipment s = em.find(Shipment.class, id);
+            if (s == null) return false;
+            em.getTransaction().begin();
+            em.remove(s);
+            em.getTransaction().commit();
+            return true;
+        }
+    }
+
+    public List<Shipment> findByParcelId(int parcelId) {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Shipment> query = em.createQuery(
+                    "select s from Shipment s where s.parcel.id = :parcelId", Shipment.class);
+            query.setParameter("parcelId", parcelId);
+            return query.getResultList();
+        }
     }
 
 
