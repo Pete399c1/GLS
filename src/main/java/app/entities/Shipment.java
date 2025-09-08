@@ -34,6 +34,6 @@ public class Shipment {
     private Location destinationLocation;
 
     private LocalDateTime shipmentDateTime;
-    
+
 
 }
